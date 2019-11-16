@@ -17,7 +17,7 @@ class SpellChecker(object):
         self.words = self.load_file(file_name)
 
     def check_profanities(self, word):
-        return profanity.contains_profanity(word)
+        return not profanity.contains_profanity(word)
         ###return word not in ['fuck', 'shit']
         
     def check_word(self, word):
@@ -54,3 +54,5 @@ if __name__ == '__main__':
     print(spell_checker.check_word('zygotic'))
     print(spell_checker.check_word('mistasdas'))
     print(spell_checker.check_words('zygotic mistasdas elementary'))
+    print(spell_checker.check_words('zygotic mistasdas shit'))
+    
