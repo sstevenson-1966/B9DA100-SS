@@ -9,6 +9,10 @@ class SpellChecker(object):
     def __init__(self):
         self.words = []
 
+    def read_book(self, book_name):
+        book_lines = open(book_name, encoding = "utf8").readlines()
+        return list(map(lambda x: x.strip().lower(), book_lines))
+        
     def load_file(self, file_name):
         lines = open(file_name).readlines()
         return list(map(lambda x: x.strip().lower(), lines))
@@ -41,14 +45,17 @@ class SpellChecker(object):
 
     def check_document(self, file_name):
         failed_words_in_sentences = []
-        self.sentences = self.load_file(file_name)
+        self.sentences = self.read_book(file_name)
         for index, sentence in enumerate(self.sentences):
+            print(index)
             failed_words_in_sentences.extend(
                 self.check_words(sentence, index))
         return failed_words_in_sentences
 
 if __name__ == '__main__':    
     spell_checker = SpellChecker()
+    print(spell_checker.check_document('Ulysses.txt'))
+    print("After Check Document")
     spell_checker.load_words('spell.words')
     # now check if the word zygotic is a word
     print(spell_checker.check_word('zygotic'))
