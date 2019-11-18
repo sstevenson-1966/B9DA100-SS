@@ -22,7 +22,6 @@ class SpellChecker(object):
 
     def check_profanities(self, word):
         return not profanity.contains_profanity(word)
-        ###return word not in ['fuck', 'shit']
         
     def check_word(self, word):
         return word.lower().strip('.,?\"') in self.words
@@ -47,19 +46,19 @@ class SpellChecker(object):
         failed_words_in_sentences = []
         self.sentences = self.read_book(file_name)
         for index, sentence in enumerate(self.sentences):
-            print(index)
             failed_words_in_sentences.extend(
                 self.check_words(sentence, index))
         return failed_words_in_sentences
 
 if __name__ == '__main__':    
     spell_checker = SpellChecker()
-    print(spell_checker.check_document('Ulysses.txt'))
-    print("After Check Document")
     spell_checker.load_words('spell.words')
+    print(type(spell_checker.check_document('Ulysses.txt')))
+
+   
     # now check if the word zygotic is a word
-    print(spell_checker.check_word('zygotic'))
-    print(spell_checker.check_word('mistasdas'))
-    print(spell_checker.check_words('zygotic mistasdas elementary'))
-    print(spell_checker.check_words('zygotic mistasdas shit'))
+    ### print(spell_checker.check_word('zygotic'))
+    ### print(spell_checker.check_word('mistasdas'))
+    ### print(spell_checker.check_words('zygotic mistasdas elementary'))
+    ### print(spell_checker.check_words('zygotic mistasdas shit'))
     
