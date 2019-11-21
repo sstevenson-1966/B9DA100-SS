@@ -50,10 +50,28 @@ class SpellChecker(object):
                 self.check_words(sentence, index))
         return failed_words_in_sentences
 
-if __name__ == '__main__':    
+if __name__ == '__main__':  
+    myLanguage = ""
+    while myLanguage.lower() != "eng" and myLanguage.lower() != "fr":
+        myLanguage = input('Enter Language : ')
+    if myLanguage == "eng":
+        spellfile = "spell.words"
+        document = 'Ulysses.txt'
+    else:
+        spellfile = "spell.wordsfr.txt"
+        document = "Queneau,Raymond,Zazie dans le metro(1959).txt"
+        document = "fr.txt"
+        
+    print(spellfile)
+    print(document)
     spell_checker = SpellChecker()
-    spell_checker.load_words('spell.words')
-    print(type(spell_checker.check_document('Ulysses.txt')))
+    print("loading spellfile")
+    spell_checker.load_words(spellfile)
+    print("check document")
+    for myitems in spell_checker.check_document(document):
+        print(myitems)
+        
+    
 
    
     # now check if the word zygotic is a word
