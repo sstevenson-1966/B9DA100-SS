@@ -7,6 +7,7 @@
 #     library does not do French profanity words
 #
 from profanity import profanity
+import glob
 
 class SpellChecker(object):
 
@@ -68,24 +69,27 @@ if __name__ == '__main__':
         myLanguage = input('Enter Language : ')
     if myLanguage.lower() == "eng":
         language_selected = "English"
-        spellfile = "spell.words"
-        document = 'Ulysses.txt'
+        spellfile = "engspell.words.txt"
     else:
         language_selected = "French"
         french_badwords = ['merde', 'Putain', 'Enculer', 'Salaud']
         profanity.load_words(french_badwords)
-        spellfile = "spell.wordsfr.txt"
-        document = "Queneau,Raymond,Zazie dans le metro(1959).txt"
-        document = "fr.txt"
-        
+        spellfile = "frspell.words.txt"
+
     print("Language selected : " + language_selected)
     print("Spelling File     : " + spellfile)
-    print("Document to check : " + document)
+    
     spell_checker = SpellChecker()
     spell_checker.load_words(spellfile)
-    for myitems in spell_checker.check_document(document):
-        print(myitems)
-        
+    
+      
+    file_wildcard = '*' + myLanguage.lower() + ".txt"
+    print(file_wildcard)
+    files_to_check = glob.glob(file_wildcard)
+    for document in files_to_check:
+        print("Document to check : " + document)
+        for myitems in spell_checker.check_document(document):
+            print(myitems)
     
 
    
