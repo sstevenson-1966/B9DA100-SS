@@ -26,19 +26,24 @@ class SpellChecker(object):
         return list(map(lambda x: x.strip().lower(), lines))
 
     ##  All valid words in spellchecker go int self.words dictionary
-    def load_words(self, file_name):
+    def load_words(self, language):
+        if language == "eng":
+            file_name = "engspell.words.txt"
+        else:
+            file_name = "frspell.words.txt"    
+
         self.words = self.load_file(file_name)
 
     ##  Check each word to see if it is a profanity
-    def check_profanities(self, word):
-        return not profanity.contains_profanity(word)
+    def is_a_profanity(self, word):
+        return profanity.contains_profanity(word)
         
     ##  Check each word to see if it is valid
     def check_word(self, word):
         return word.lower().strip('.,\?-') in self.words
     
     ##  Loop for checking every word in every sentence in the book/document
-    def check_words(self, sentence, index=0):
+    def check_words(self, sentence, language, index=0):
         failed_words = []
         words_to_check = sentence.split(' ')
         caret_position = 0
@@ -47,7 +52,7 @@ class SpellChecker(object):
                 failed_words.append(
                     {'word':word, 'line':index+1,
                         'pos':caret_position+1, 'type': 'spelling'})
-            if not self.check_profanities(word):
+            if self.is_a_profanity(word):
                 failed_words.append(
                     {'word':word, 'line':index+1,
                         'pos':caret_position+1, 'type': 'profanity'})
@@ -55,32 +60,28 @@ class SpellChecker(object):
         return failed_words
 
     ##  Check document
-    def check_document(self, file_name):
+    def check_document(self, file_name, language):
         failed_words_in_sentences = []
         self.sentences = self.read_book(file_name)
         for index, sentence in enumerate(self.sentences):
             failed_words_in_sentences.extend(
-                self.check_words(sentence, index))
+                self.check_words(sentence, language, index))
         return failed_words_in_sentences
 
+    def prepare_profanities(self, language):
+        if language == "fr":
+            badwords = ['merde', 'Putain', 'Enculer', 'Salaud']
+        else:
+            badwords = ['fuck', 'shit', 'cock']
+        profanity.load_words(badwords)
+                    
 if __name__ == '__main__':  
     myLanguage = ""
     while myLanguage.lower() != "eng" and myLanguage.lower() != "fr":
         myLanguage = input('Enter Language : ')
-    if myLanguage.lower() == "eng":
-        language_selected = "English"
-        spellfile = "engspell.words.txt"
-    else:
-        language_selected = "French"
-        french_badwords = ['merde', 'Putain', 'Enculer', 'Salaud']
-        profanity.load_words(french_badwords)
-        spellfile = "frspell.words.txt"
-
-    print("Language selected : " + language_selected)
-    print("Spelling File     : " + spellfile)
-    
     spell_checker = SpellChecker()
-    spell_checker.load_words(spellfile)
+    spell_checker.load_words(myLanguage.lower())
+    spell_checker.prepare_profanities(myLanguage.lower())
     
       
     file_wildcard = '*' + myLanguage.lower() + ".txt"
@@ -88,11 +89,11 @@ if __name__ == '__main__':
     files_to_check = glob.glob(file_wildcard)
     for document in files_to_check:
         print("Document to check : " + document)
-        for myitems in spell_checker.check_document(document):
+        for myitems in spell_checker.check_document(document, myLanguage.lower()):
             print(myitems)
     
 
-   
+    print(len(spell_checker.read_book("fr.txt")))
     # now check if the word zygotic is a word
     ### print(spell_checker.check_word('zygotic'))
     ### print(spell_checker.check_word('mistasdas'))
