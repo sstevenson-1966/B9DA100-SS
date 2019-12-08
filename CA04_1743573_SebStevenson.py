@@ -29,7 +29,7 @@ def enter_customer(p_df):
             return(new_customer)
 
         while True:
-            add_customer = input("Add new customer [Y/N] : ")
+            add_customer = input("Unknown Customer - Add new customer [Y/N] : ")
             if add_customer.upper() == "Y" or add_customer.upper() == "N":
                 break
             
@@ -48,18 +48,40 @@ def enter_date():
     return(date1)
     
 
+def enter_amount():
+    while True:
+        number_entry = input("Enter Amount [-ve indicates payment] : ")
+        try:
+            val_number_entry = float(number_entry)
+            break
+        except:
+            print("Enter valid number ")
+            
+    return(round(val_number_entry,2))
+            
+
            
 def enter_new_trans():
     new_company = enter_provider(df)
     new_customer = enter_customer(df)
     new_date = enter_date()
-    print(type(new_date))
-                
+    new_amount = enter_amount()
+    print("Company : " + new_company + "   Customer : " + new_customer + "    Date : " + str(new_date) + "     Amount : " + str(new_amount))
+    print(new_amount)
+    print(new_date.year)
+    print(new_date.month)
+    print(new_date.day)     
+    if new_amount < 0:
+        new_cr_db = 'credit'
+        new_amount = new_amount * -1
+    else:
+        new_cr_db = 'debit'
+    objdf = df.append({'company' : new_company, 'customer' : new_customer, 'year' : new_date.year, 'month' : new_date.month, 'day' : new_date.day, 'amount' : new_amount, 'credit/debit' : new_cr_db}, ignore_index = True)      
+    print(objdf)
                 
 
     
     
 df = read_bills()
 enter_new_trans()
-
 
