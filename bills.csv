@@ -1,20 +1,26 @@
 Electric Ireland, John Smyth,2017,5,12,11.58, credit
 Energia, Missy May,2016,12,22,122.52, debit
-Vodafone, John Smyth,2016,11,17,20, debit
-Energia, Susie Sue,2016,11,3,25, debit
-Vodafone, Susie Sue,2016,11,17,5, credit
-Electric Ireland, John Smyth,2017,5,12,11.58, credit
+Vodafone, John Smyth,2016,11,17,20.0, debit
+Energia, Susie Sue,2016,11,3,25.0, debit
+Vodafone, Susie Sue,2016,11,17,5.0, credit
 Energia, Missy May,2017,12,22,122.52, debit
-Vodafone, John Smyth,2017,11,17,20, debit
-Energia, Susie Sue,2017,11,3,25, debit
-Vodafone, Susie Sue,2017,11,17,5, credit
+Vodafone, John Smyth,2017,11,17,20.0, debit
+Energia, Susie Sue,2017,11,3,25.0, debit
+Vodafone, Susie Sue,2017,11,17,5.0, credit
 Electric Ireland, John Smyth,2017,5,12,21.58, credit
 Energia, Missy May,2018,12,22,152.52, debit
-Vodafone, John Smyth,2018,11,17,20, debit
-Energia, Susie Sue,2018,11,3,35, debit
-Vodafone, Susie Sue,2018,11,17,5, credit
+Vodafone, John Smyth,2018,11,17,20.0, debit
+Energia, Susie Sue,2018,11,3,35.0, debit
+Vodafone, Susie Sue,2018,11,17,5.0, credit
 Electric Ireland, John Smyth,2019,5,12,81.58, credit
 Energia, Missy May,2019,12,22,122.52, debit
-Vodafone, John Smyth,2019,11,17,120, debit
-Energia, Susie Sue,2019,11,3,25, debit
-Vodafone, Susie Sue,2019,11,17,15, credit
+Vodafone, John Smyth,2019,11,17,120.0, debit
+Energia, Susie Sue,2019,11,3,25.0, debit
+Vodafone, Susie Sue,2019,11,17,15.0, credit
+Energia,Boris Johnson,2019,12,12,89.0,debit
+Vodafone,Leo Varadker,2019,12,13,110.0,debit
+Electric Ireland,Joe Bloggs,2019,12,15,20.0,debit
+Energia,Boris Johnson,2019,12,13,9.0,credit
+Energia,Jane Doe,2019,1,1,89.0,debit
+Energia,Boris Johnson,2019,12,25,45.0,debit
+Energia,Joe Bloggs,2019,12,25,200.0,debit
